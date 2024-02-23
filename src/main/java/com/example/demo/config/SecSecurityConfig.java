@@ -29,6 +29,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecSecurityConfig {
     
+    //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
+    
     /**@Bean
     public InMemoryUserDetailsManager userDetailsService(){
         
