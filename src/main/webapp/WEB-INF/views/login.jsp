@@ -28,7 +28,6 @@
                 </tr>
             </table>
         </form>
-        
         <script type="text/javascript">
             function validate() {
                 if (document.f.username.value == "" && document.f.password.value == "") {
@@ -48,6 +47,5 @@
            }
        }
         </script>
-        
     </body>
 </html>
