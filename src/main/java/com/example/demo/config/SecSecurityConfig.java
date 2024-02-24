@@ -32,7 +32,7 @@ public class SecSecurityConfig {
     
     //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
     
-    @Bean
+    /**@Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         http
             .formLogin(formLogin -> formLogin
@@ -52,20 +52,21 @@ public class SecSecurityConfig {
                     .requestMatchers(new AntPathRequestMatcher("/user/**")).hasRole("USER")
                     .requestMatchers(new AntPathRequestMatcher("/shared/**")).hasAnyRole("USER","ADMIN")
                     .anyRequest().authenticated())
+                   
             .exceptionHandling(handling -> handling
                     .accessDeniedPage("/403.html"));
         return http.build();
-    }
+    }**/
     
-    @Bean
+    /**@Bean
     public InMemoryUserDetailsManager userDetailsService() {
         return new InMemoryUserDetailsManager(
                 User.withUsername("jim").password("{noop}demo").roles("ADMIN").build(),
                 User.withUsername("bob").password("{noop}demo").roles("USER").build(),
                 User.withUsername("ted").password("{noop}demo").roles("USER","ADMIN").build());
-    }
+    }**/
     
-    /**@Bean
+    @Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http
@@ -74,12 +75,15 @@ public class SecSecurityConfig {
 				)
 				.httpBasic(withDefaults())
 				.formLogin(withDefaults());
+                                //.formLogin(formLogin -> formLogin
+                                        //.loginPage("/login")
+                                       // .failureUrl("/login-error.html"));
 		// @formatter:on
 		return http.build();
-	}**/
+	}
 
 	// @formatter:off
-	/**@Bean
+	@Bean
 	public InMemoryUserDetailsManager userDetailsService() {
 		UserDetails user = User.withDefaultPasswordEncoder()
 				.username("user")
@@ -87,7 +91,7 @@ public class SecSecurityConfig {
 				.roles("USER")
 				.build();
 		return new InMemoryUserDetailsManager(user);
-	}**/
+	}
 	// @formatter:on
     
     /**@Bean
