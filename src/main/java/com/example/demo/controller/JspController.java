@@ -32,6 +32,11 @@ public class JspController {
         return "home";
     }
     
+    @GetMapping("/")
+    public String goToHomePage1(){
+        return "home";
+    }
+    
     @GetMapping("/login")
     public String goToLoginPage(){
         return "login";

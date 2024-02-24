@@ -31,7 +31,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
         return jspViewResolver;
     }
     
-     @Override
+    /** @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         
         //registry.addViewController("/index.html");
@@ -40,5 +40,5 @@ public class WebMvcConfig implements WebMvcConfigurer{
         registry.addViewController("/home").setViewName("home");
         registry.addViewController("/dashboard").setViewName("dashboard");
         registry.addViewController("/wrongCredentials").setViewName("wrongCredentials");   
-    }
+    }**/
 }

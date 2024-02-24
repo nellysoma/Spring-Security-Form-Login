@@ -31,6 +31,31 @@ public class SecSecurityConfig {
     
     //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
     
+    @Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		// @formatter:off
+		http
+				.authorizeHttpRequests((authorize) -> authorize
+						.anyRequest().authenticated()
+				)
+				.httpBasic(withDefaults())
+				.formLogin(withDefaults());
+		// @formatter:on
+		return http.build();
+	}
+
+	// @formatter:off
+	@Bean
+	public InMemoryUserDetailsManager userDetailsService() {
+		UserDetails user = User.withDefaultPasswordEncoder()
+				.username("user")
+				.password("password")
+				.roles("USER")
+				.build();
+		return new InMemoryUserDetailsManager(user);
+	}
+	// @formatter:on
+    
     /**@Bean
     public InMemoryUserDetailsManager userDetailsService(){
         
@@ -53,7 +78,7 @@ public class SecSecurityConfig {
         
     }**/
     
-    @Bean
+    /**@Bean
     public UserDetailsService userDetailsService() {
         
         //UserBuilder users = User.withDefaultPasswordEncoder();
@@ -77,7 +102,7 @@ public class SecSecurityConfig {
                 return userDetails;
                 
 		//return new InMemoryUserDetailsManager(user,user1);
-	}
+	}**/
     
     
     /**protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -92,7 +117,7 @@ public class SecSecurityConfig {
                  .withUser(user1);
     }**/
     
-    @Bean
+    /**@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
@@ -117,7 +142,7 @@ public class SecSecurityConfig {
                 .formLogin()**/
                 ;
       
-        return http.build();
+        //return http.build();
         
        /** http.authorizeRequests()
                 .requestMatchers("/login").permitAll()
@@ -169,17 +194,17 @@ public class SecSecurityConfig {
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(logoutSuccessHandler());**/
 
-    }
-     @Bean
+    //}
+     /**@Bean
      
      public WebSecurityCustomizer webSecurityCustomiaer (){
          
          return (web) -> web.ignoring().requestMatchers("/home");
-     }
+     }**/
     
-    @Bean
+    /**@Bean
     public PasswordEncoder passwordEncoder(){
         
         return new BCryptPasswordEncoder();
-    }
+    }**/
 }
