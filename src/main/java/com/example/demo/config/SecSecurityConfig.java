@@ -66,7 +66,7 @@ public class SecSecurityConfig {
                 User.withUsername("ted").password("{noop}demo").roles("USER","ADMIN").build());
     }**/
     
-    @Bean
+    /**@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http
@@ -80,7 +80,16 @@ public class SecSecurityConfig {
                                        // .failureUrl("/login-error.html"));
 		// @formatter:on
 		return http.build();
-	}
+	}**/
+    
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            
+            http.formLogin((formLogin)-> formLogin
+                    .loginPage("/login.html")
+                    .defaultSuccessUrl("/dashboard.html"));
+            return http.build();
+        }
 
 	// @formatter:off
 	@Bean

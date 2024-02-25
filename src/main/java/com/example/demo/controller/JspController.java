@@ -22,12 +22,12 @@ public class JspController {
         return "view.name";
     }
     
-    @GetMapping("/dashboard")
+    @GetMapping("/dashboard.html")
     public String goToDashboard(){
-        return "dashboarc";
+        return "dashboard";
     }
     
-    @GetMapping("/home")
+    @GetMapping("/home.html")
     public String goToHomePage(){
         return "home";
     }
@@ -37,12 +37,12 @@ public class JspController {
         return "home";
     }
     
-    @GetMapping("/login")
+    @GetMapping("/login.html")
     public String goToLoginPage(){
         return "login";
     }
     
-    @GetMapping("/wrongCredentials")
+    @GetMapping("/wrongCredentials.html")
     public String goTowrongCredentialsPage(){
         return "wrongCredentials";
     }

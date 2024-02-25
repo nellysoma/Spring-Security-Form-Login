@@ -1,0 +1,12 @@
+{
+    "elements": {},
+    "attributes": {
+        "th:if": {
+            "context": "p"
+        },
+        "th:action": {
+            "context": "form"
+        },
+        "th:href": {}
+    }
+}
