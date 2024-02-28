@@ -98,40 +98,26 @@ public class SecSecurityConfig {
                             new AntPathRequestMatcher("/login.html"),
                             new AntPathRequestMatcher("/css/**"),
                             new AntPathRequestMatcher("/favicon.ico")).permitAll()
-                    .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
+                    .requestMatchers(new AntPathRequestMatcher("/admin")).hasRole("ADMIN")
+                    //.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
                     .requestMatchers(new AntPathRequestMatcher("/user/**")).hasRole("USER")
                     .requestMatchers(new AntPathRequestMatcher("/shared/**")).hasAnyRole("USER","ADMIN")
+                    .anyRequest().authenticated()
                     )
+                    .exceptionHandling(handling -> handling
+                    .accessDeniedPage("/403.html"))
                     ;
             return http.build();
         }
 
 	// @formatter:off
 	@Bean
-	public InMemoryUserDetailsManager userDetailsService() {
-		UserDetails user = User.withDefaultPasswordEncoder()
-				.username("user")
-				.password("password")
-				.roles("USER")
-				.build();
-                
-                UserDetails jim = User.withUsername("jim")
-                        .password("{noop}demo")
-                        .roles("ADMIN")
-                        .build();
-               
-                UserDetails bob = User.withUsername("bob")
-                        .password("{noop}demo")
-                        .roles("USER")
-                        .build();
-                
-		UserDetails ted = User.withUsername("ted")
-                        .password("{noop}demo")
-                        .roles("USER","ADMIN")
-                        .build();
-                
-                return new InMemoryUserDetailsManager(user,jim,bob,ted);
-	}
+    public InMemoryUserDetailsManager userDetailsService() {
+        return new InMemoryUserDetailsManager(
+                User.withUsername("jim").password("{noop}demo").roles("ADMIN").build(),
+                User.withUsername("bob").password("{noop}demo").roles("USER").build(),
+                User.withUsername("ted").password("{noop}demo").roles("USER","ADMIN").build());
+    }
 	// @formatter:on
     
     /**@Bean

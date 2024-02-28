@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -94,6 +95,22 @@ public class WebMvcConfig implements WebMvcConfigurer{
         jspViewResolver.setPrefix("/WEB-INF/views/");
         jspViewResolver.setSuffix(".jsp");
         return jspViewResolver;
+    }
+    
+    /* ******************************************************************* */
+    /*  Defines callback methods to customize the Java-based configuration */
+    /*  for Spring MVC enabled via {@code @EnableWebMvc}                   */
+    /* ******************************************************************* */
+
+    /**
+     *  Dispatcher configuration for serving static resources
+     */
+    @Override
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+        WebMvcConfigurer.super.addResourceHandlers(registry);
+        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+        registry.addResourceHandler("/css/**").addResourceLocations("/css/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/js/");
     }
     
     /** @Override
