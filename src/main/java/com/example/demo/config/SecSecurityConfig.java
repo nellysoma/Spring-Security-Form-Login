@@ -111,7 +111,23 @@ public class SecSecurityConfig {
 				.password("password")
 				.roles("USER")
 				.build();
-		return new InMemoryUserDetailsManager(user);
+                
+                UserDetails jim = User.withUsername("jim")
+                        .password("{noop}demo")
+                        .roles("ADMIN")
+                        .build();
+               
+                UserDetails bob = User.withUsername("bob")
+                        .password("{noop}demo")
+                        .roles("USER")
+                        .build();
+                
+		UserDetails ted = User.withUsername("ted")
+                        .password("{noop}demo")
+                        .roles("USER","ADMIN")
+                        .build();
+                
+                return new InMemoryUserDetailsManager(user,jim,bob,ted);
 	}
 	// @formatter:on
     
