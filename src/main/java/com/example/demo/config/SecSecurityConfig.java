@@ -87,7 +87,7 @@ public class SecSecurityConfig {
             
             http.formLogin((formLogin)-> formLogin
                     .loginPage("/login.html")
-                    .defaultSuccessUrl("/dashboard.html")
+                    //.defaultSuccessUrl("/dashboard.html")
                     .failureUrl("/wrongCredentials.html"))
                     .logout(logout -> logout
                     .logoutSuccessUrl("/home.html"))
@@ -98,6 +98,9 @@ public class SecSecurityConfig {
                             new AntPathRequestMatcher("/login.html"),
                             new AntPathRequestMatcher("/css/**"),
                             new AntPathRequestMatcher("/favicon.ico")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
+                    .requestMatchers(new AntPathRequestMatcher("/user/**")).hasRole("USER")
+                    .requestMatchers(new AntPathRequestMatcher("/shared/**")).hasAnyRole("USER","ADMIN")
                     )
                     ;
             return http.build();

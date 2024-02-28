@@ -46,4 +46,10 @@ public class JspController {
     public String goTowrongCredentialsPage(){
         return "wrongCredentials";
     }
+    
+     @GetMapping("admin/home.html")
+    public String goToAdminHomePage() {
+        return "home";
+    }
+    
 }
