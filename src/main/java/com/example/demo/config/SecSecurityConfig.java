@@ -87,7 +87,19 @@ public class SecSecurityConfig {
             
             http.formLogin((formLogin)-> formLogin
                     .loginPage("/login.html")
-                    .defaultSuccessUrl("/dashboard.html"));
+                    .defaultSuccessUrl("/dashboard.html")
+                    .failureUrl("/wrongCredentials.html"))
+                    .logout(logout -> logout
+                    .logoutSuccessUrl("/home.html"))
+                    .authorizeHttpRequests(authorize -> authorize
+                    .requestMatchers(
+                            new AntPathRequestMatcher("/"),
+                            new AntPathRequestMatcher("/home.html"),
+                            new AntPathRequestMatcher("/login.html"),
+                            new AntPathRequestMatcher("/css/**"),
+                            new AntPathRequestMatcher("/favicon.ico")).permitAll()
+                    )
+                    ;
             return http.build();
         }
 
